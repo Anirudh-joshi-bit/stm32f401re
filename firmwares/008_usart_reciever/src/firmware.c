@@ -7,7 +7,7 @@ void delay(int count) {
     ;
 }
 
-char data[10];
+char data[11];
 
 int main() {
 
@@ -22,20 +22,29 @@ int main() {
   GPIOA->OSPEEDR |=
       (3 << (TX_PIN * 2)) | (3 << (RX_PIN * 2)); // ospeed takes 2 bits
 
-  GPIOA-> AFR[1] &= ~((0xf << 4) | (0xf << 8)); // clear the previous values
-  GPIOA->AFR[1] |= (7 << 4) | (7 << 8); // move 4 places at once
+  GPIOA->AFR[1] &= ~((0xf << 4) | (0xf << 8)); // clear the previous values
+  GPIOA->AFR[1] |= (7 << 4) | (7 << 8);        // move 4 places at once
 
   USART1->CR1 |= USART_CR1_RE | USART_CR1_UE | USART_CR1_TE;
   USART1->BRR = 0x08B;
 
   int i = 0;
 
-  while (i < 10) {
+  while (i < 11) {
 
     while (!(USART1->SR & USART_SR_RXNE)) {
     }
     data[i++] = USART1->DR;
   }
+  delay(500000);
   while (1) {
+    i = 0;
+    while (i < 11) {
+      while (!(USART1->SR & USART_SR_TXE)) {
+      }
+      USART1->DR = data[i++];
+    }
+    delay (500000);
   }
+
 }
