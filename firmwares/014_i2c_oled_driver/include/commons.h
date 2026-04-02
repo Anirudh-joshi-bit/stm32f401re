@@ -5,8 +5,3 @@
 #include <stdbool.h>
 
 void printf(const char *msg, uint32_t address);
-void __usart1_init(void);
-void flash_write(const uint32_t *buff, uint32_t size, uint32_t sector,
-                 uint32_t address);
-void __i2c1_init(void);
-int8_t __i2c1_print(const uint8_t *string, uint32_t size, uint16_t dev_addr);

@@ -1,5 +1,6 @@
 #include "../include/SH1106_driver.h"
 #include "../include/commons.h"
+#include "../include/I2C.h"
 
 void oled_init(void) {
 
