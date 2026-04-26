@@ -1,0 +1,62 @@
+SH1106 OLED Controller - Command Reference Table
+
+------------------------------------------------------------
+Fundamental Display Control
+------------------------------------------------------------
+0xAE  - Display OFF              : Turns display off (sleep mode)
+0xAF  - Display ON               : Turns display on
+0xA4  - Resume RAM display       : Display follows RAM content
+0xA5  - Entire display ON        : Forces all pixels ON (ignore RAM)
+0xA6  - Normal display           : 0 = OFF pixel, 1 = ON pixel
+0xA7  - Inverse display          : 0 = ON pixel, 1 = OFF pixel
+
+------------------------------------------------------------
+Addressing Commands
+------------------------------------------------------------
+0xB0–0xB7 - Set Page Address     : Select page (0–7), each page = 8 rows
+0x00–0x0F - Set Lower Column     : Lower 4 bits of column address
+0x10–0x1F - Set Higher Column    : Upper 4 bits of column address
+
+------------------------------------------------------------
+Display Orientation
+------------------------------------------------------------
+0xA0  - Segment remap normal     : Column mapping left → right
+0xA1  - Segment remap reverse    : Column mapping reversed
+0xC0  - COM scan normal          : Rows top → bottom
+0xC8  - COM scan reverse         : Rows bottom → top
+
+------------------------------------------------------------
+Contrast & Brightness
+------------------------------------------------------------
+0x81 + value - Set Contrast      : Adjust brightness (0x00–0xFF)
+
+------------------------------------------------------------
+Display Configuration
+------------------------------------------------------------
+0xA8 + value - Multiplex Ratio   : Number of active rows (e.g., 0x3F for 64px)
+0xD3 + value - Display Offset    : Vertical shift
+0x40–0x7F   - Start Line         : Set display start line
+
+------------------------------------------------------------
+Timing & Driving
+------------------------------------------------------------
+0xD5 + value - Display Clock     : Internal clock setting
+0xD9 + value - Pre-charge Period : Pixel charging timing
+0xDB + value - VCOMH Level       : Voltage level adjustment
+
+------------------------------------------------------------
+Hardware Configuration
+------------------------------------------------------------
+0xDA + value - COM Pins Config   : COM pin hardware layout
+
+------------------------------------------------------------
+Power Control
+------------------------------------------------------------
+0x8D + value - Charge Pump       : Enable/disable voltage booster
+
+------------------------------------------------------------
+Notes
+------------------------------------------------------------
+- Display is divided into 8 pages × 128 columns
+- Each byte controls 8 vertical pixels
+- SH1106 internally has 132 columns → use column offset (~2)
