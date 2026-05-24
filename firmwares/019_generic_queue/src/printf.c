@@ -92,6 +92,6 @@ void printf(const char *msg, ...) {
   }
   va_end (args);
   __msg[__msg_ind] = '\0';
-  __usart2_print (__msg, strlen (__msg));
+  __usart1_print (__msg, strlen (__msg));
 
 }
