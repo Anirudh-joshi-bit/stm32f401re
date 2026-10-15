@@ -60,7 +60,7 @@ $(BUILD)/%_as_.o : $(SRC)/%.s
 	$(AS) $< -o $@
 
 clean : 
-	@rm $(BUILD)/*.o $(BUILD)/*.bin $(BUILD)/*.elf
+	rm $(BUILD)/*.o $(BUILD)/*.bin $(BUILD)/*.elf
 	
 
 
